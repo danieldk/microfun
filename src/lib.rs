@@ -2,6 +2,8 @@
 
 use microbit::TEMP;
 
+pub mod display;
+
 pub mod font;
 
 pub struct Temperature(pub TEMP);

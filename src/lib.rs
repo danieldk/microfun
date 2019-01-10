@@ -6,6 +6,8 @@ pub mod display;
 
 pub mod font;
 
+pub mod image;
+
 pub struct Temperature(pub TEMP);
 
 impl Temperature {

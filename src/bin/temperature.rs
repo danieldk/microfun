@@ -13,6 +13,7 @@ use panic_halt;
 
 use microfun::display::ScrollImages;
 use microfun::font::Font;
+use microfun::image::Image;
 use microfun::Temperature;
 
 #[entry]
@@ -44,26 +45,21 @@ fn main() -> ! {
 
         let font = Font::default();
 
-        let digit3 = font.char_bits(b'C');
+        let mut digits = [Image::default(); 4];
+        digits[3] = font.char_bits(b'C');
 
         loop {
             let current_temp = temp.temperature();
             write!(tx, "Temperature: {}\n\r", current_temp).unwrap();
 
-            let digit1 = font.char_bits((current_temp / 10) as u8 + 48);
-            let digit2 = font.char_bits((current_temp % 10) as u8 + 48);
-
-            let mut digits = [[0; 5]; 20];
-            let digit0 = if current_temp < 0 {
+            digits[0] = if current_temp < 0 {
                 font.char_bits(b'-')
             } else {
                 font.char_bits(b'+')
             };
 
-            digits[0..5].copy_from_slice(&digit0);
-            digits[5..10].copy_from_slice(&digit1);
-            digits[10..15].copy_from_slice(&digit2);
-            digits[15..].copy_from_slice(&digit3);
+            digits[1] = font.char_bits((current_temp / 10) as u8 + 48);
+            digits[2] = font.char_bits((current_temp % 10) as u8 + 48);
 
             leds.scroll_images(&mut delay, &digits, 200);
 

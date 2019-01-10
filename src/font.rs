@@ -24,6 +24,8 @@
 
 use core::ops::Range;
 
+use crate::image::Image;
+
 /// Range of covered ASCII code points.
 const ASCII_RANGE: Range<u8> = (32..127);
 
@@ -85,7 +87,7 @@ impl<'a> Font<'a> {
         bytes
     }
 
-    pub fn char_bits(&self, ch: u8) -> [[u8; 5]; 5] {
+    pub fn char_bits(&self, ch: u8) -> Image {
         let ch_bytes = self.char_font_bytes(ch);
 
         let mut bits = [[0; 5]; 5];

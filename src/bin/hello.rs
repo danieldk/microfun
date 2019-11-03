@@ -8,7 +8,7 @@ use microbit::hal::delay::Delay;
 use microbit::hal::prelude::*;
 use microbit::hal::serial;
 use microbit::hal::serial::BAUD115200;
-use panic_halt;
+use panic_halt as _;
 
 #[entry]
 fn main() -> ! {

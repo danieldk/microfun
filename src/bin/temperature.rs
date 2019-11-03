@@ -9,7 +9,7 @@ use microbit::hal::prelude::*;
 use microbit::hal::serial;
 use microbit::hal::serial::BAUD115200;
 use microbit::led;
-use panic_halt;
+use panic_halt as _;
 
 use microfun::display::ScrollImages;
 use microfun::font::Font;

@@ -15,10 +15,10 @@ impl ScrollImages for led::Display {
         let mut image = [[0; 5]; 5];
 
         for offset in 0..((images.len() * 5) - 5) {
-            for row in 0..5 {
-                for col in 0..5 {
+            for (row, image_row) in image.iter_mut().enumerate() {
+                for (col, image_col) in image_row.iter_mut().enumerate().take(5) {
                     let col_offset = col + offset;
-                    image[row][col] = images[col_offset / 5][row][col_offset % 5];
+                    *image_col = images[col_offset / 5][row][col_offset % 5];
                 }
             }
 
